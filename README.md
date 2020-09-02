@@ -16,6 +16,9 @@ In case it wasn't obvious enough, let me also put this in big scary letters.
 :warning: **DO NOT USE THIS IN WORLDS YOU CARE ABOUT.** There may be serious problems. This entire mod was constructed
 in one night.
 
+As with most things I publish, this repository's existence is not a guarantee that I'll maintain this mod. This mod is
+an experiment. Please keep that in mind.
+
 ### License
 
 Hydrogen is licensed under GNU LGPLv3, a free and open-source license. For more information, please see the
