@@ -6,54 +6,11 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 import java.util.Arrays;
 
 public class FastImmutableTableCache<R, C, V> {
-    private final ObjectOpenCustomHashSet<R[]> rows = new ObjectOpenCustomHashSet<>(new Hash.Strategy<R[]>() {
-        @Override
-        public int hashCode(R[] o) {
-            return Arrays.hashCode(o);
-        }
+    private final ObjectOpenCustomHashSet<R[]> rows = new ObjectOpenCustomHashSet<>(new ObjectArrayEqualityStrategy<>());
+    private final ObjectOpenCustomHashSet<C[]> columns = new ObjectOpenCustomHashSet<>(new ObjectArrayEqualityStrategy<>());
+    private final ObjectOpenCustomHashSet<V[]> values = new ObjectOpenCustomHashSet<>(new ObjectArrayEqualityStrategy<>());
 
-        @Override
-        public boolean equals(R[] a, R[] b) {
-            return Arrays.equals(a, b);
-        }
-    });
-
-    private final ObjectOpenCustomHashSet<C[]> columns = new ObjectOpenCustomHashSet<>(new Hash.Strategy<C[]>() {
-        @Override
-        public int hashCode(C[] o) {
-            return Arrays.hashCode(o);
-        }
-
-        @Override
-        public boolean equals(C[] a, C[] b) {
-            return Arrays.equals(a, b);
-        }
-    });
-
-    private final ObjectOpenCustomHashSet<V[]> values = new ObjectOpenCustomHashSet<>(new Hash.Strategy<V[]>() {
-        @Override
-        public int hashCode(V[] o) {
-            return Arrays.hashCode(o);
-        }
-
-        @Override
-        public boolean equals(V[] a, V[] b) {
-            return Arrays.equals(a, b);
-        }
-    });
-
-
-    private final ObjectOpenCustomHashSet<int[]> ints = new ObjectOpenCustomHashSet<>(new Hash.Strategy<int[]>() {
-        @Override
-        public int hashCode(int[] o) {
-            return Arrays.hashCode(o);
-        }
-
-        @Override
-        public boolean equals(int[] a, int[] b) {
-            return Arrays.equals(a, b);
-        }
-    });
+    private final ObjectOpenCustomHashSet<int[]> indices = new ObjectOpenCustomHashSet<>(new IntArrayEqualityStrategy());
 
     public synchronized V[] dedupValues(V[] values) {
         return this.values.addOrGet(values);
@@ -68,6 +25,31 @@ public class FastImmutableTableCache<R, C, V> {
     }
 
     public synchronized int[] dedupIndices(int[] ints) {
-        return this.ints.addOrGet(ints);
+        return this.indices.addOrGet(ints);
     }
+
+    private static class ObjectArrayEqualityStrategy<T> implements Hash.Strategy<T[]> {
+        @Override
+        public int hashCode(T[] o) {
+            return Arrays.hashCode(o);
+        }
+
+        @Override
+        public boolean equals(T[] a, T[] b) {
+            return Arrays.equals(a, b);
+        }
+    }
+
+    private static class IntArrayEqualityStrategy implements Hash.Strategy<int[]> {
+        @Override
+        public int hashCode(int[] o) {
+            return Arrays.hashCode(o);
+        }
+
+        @Override
+        public boolean equals(int[] a, int[] b) {
+            return Arrays.equals(a, b);
+        }
+    }
+
 }

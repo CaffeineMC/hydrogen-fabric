@@ -39,12 +39,6 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
         this.rowCount = rowKeySet.size();
         this.columnCount = columnKeySet.size();
 
-        if (this.rowCount > Byte.MAX_VALUE) {
-            throw new IllegalArgumentException("Too many rows!");
-        } else if (this.columnCount > Byte.MAX_VALUE) {
-            throw new IllegalArgumentException("Too many columns!");
-        }
-
         int rowN = arraySize(this.rowCount, loadFactor);
         int columnN = arraySize(this.columnCount, loadFactor);
 
