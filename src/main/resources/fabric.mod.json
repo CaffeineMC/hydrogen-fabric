@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "hydrogen",
+  "version": "${version}",
+  "name": "Hydrogen",
+  "description": "A Minecraft mod designed to reduce the memory usage of the game.",
+  "authors": [
+    "JellySquid"
+  ],
+  "contact": {
+    "homepage": "https://jellysquid.me",
+    "sources": "https://github.com/jellysquid3/hydrogen-fabric"
+  },
+  "license": "LGPL-3.0-only",
+  "environment": "*",
+  "mixins": [
+    "hydrogen.mixins.json"
+  ],
+  "entrypoints": {
+    "preLaunch": [
+      "me.jellysquid.mods.hydrogen.common.HydrogenPreLaunch"
+    ]
+  },
+  "accessWidener": "hydrogen.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.9.0",
+    "minecraft": "1.16.2"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "package": "me.jellysquid.mods.hydrogen.mixin",
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "client.model.MixinBasicBakedModel",
+    "client.model.MixinModelLoader",
+    "client.model.MixinMultipartBakedModel",
+    "client.model.MixinWeightedBakedModel",
+    "client.model.json.MixinModelOverride",
+    "client.model.json.MixinModelOverrideList",
+    "client.model.json.MixinAndMultipartModelSelector",
+    "client.model.json.MixinSimpleMultipartModelSelector"
+  ],
+  "mixins": [
+    "state.MixinState",
+    "nbt.MixinCompoundTag"
+  ]
+}

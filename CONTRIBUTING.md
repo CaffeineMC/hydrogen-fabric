@@ -1,0 +1,1 @@
+Suicide Prevention Lifeline: https://suicidepreventionlifeline.org/ (24/7 phone lifeline: 1-800-273-8255)
