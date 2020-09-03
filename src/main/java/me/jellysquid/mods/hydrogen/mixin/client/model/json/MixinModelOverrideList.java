@@ -1,5 +1,7 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model.json;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import me.jellysquid.mods.hydrogen.common.collections.CollectionHelper;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelOverride;
 import net.minecraft.client.render.model.json.ModelOverrideList;
@@ -28,7 +30,7 @@ public class MixinModelOverrideList {
 
     @Inject(method = "<init>()V", at = @At("RETURN"))
     private void reinit(CallbackInfo ci) {
-        this.overrides = new ArrayList<>(this.overrides);
-        this.models = new ArrayList<>(this.models);
+        this.overrides = CollectionHelper.fixed(this.overrides);
+        this.models = CollectionHelper.fixed(this.models);
     }
 }

@@ -1,6 +1,6 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model.json;
 
-import me.jellysquid.mods.hydrogen.common.collections.CompactCollectors;
+import me.jellysquid.mods.hydrogen.common.collections.CollectionHelper;
 import net.minecraft.client.render.model.json.AndMultipartModelSelector;
 import net.minecraft.client.render.model.json.MultipartModelSelector;
 import org.spongepowered.asm.mixin.Final;
@@ -23,7 +23,7 @@ public class MixinAndMultipartModelSelector {
     @Redirect(method = "getPredicate", at = @At(value = "INVOKE", target = "Ljava/util/stream/Collectors;toList()Ljava/util/stream/Collector;"))
     private <T> Collector<T, ?, List<T>> redirectGetPredicateCollector() {
         if (this.selectors instanceof Collection) {
-            return CompactCollectors.toSizedList(((Collection<?>) this.selectors).size());
+            return CollectionHelper.toSizedList(((Collection<?>) this.selectors).size());
         }
 
         return Collectors.toList();

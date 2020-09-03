@@ -1,6 +1,7 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import me.jellysquid.mods.hydrogen.common.collections.CollectionHelper;
 import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.render.model.BasicBakedModel;
 import net.minecraft.client.render.model.json.ModelOverrideList;
@@ -32,10 +33,10 @@ public class MixinBasicBakedModel {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void reinit(List<BakedQuad> quads, Map<Direction, List<BakedQuad>> faceQuads, boolean usesAo, boolean isSideLit, boolean hasDepth, Sprite sprite, ModelTransformation modelTransformation, ModelOverrideList modelOverrideList, CallbackInfo ci) {
-        this.quads = new ObjectArrayList<>(this.quads);
+        this.quads = CollectionHelper.fixed(this.quads);
 
         for (Map.Entry<Direction, List<BakedQuad>> entry : this.faceQuads.entrySet()) {
-            entry.setValue(new ObjectArrayList<>(entry.getValue()));
+            entry.setValue(CollectionHelper.fixed(entry.getValue()));
         }
     }
 }

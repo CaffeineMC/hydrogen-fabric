@@ -1,8 +1,7 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model.json;
 
 import com.google.common.base.Splitter;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import me.jellysquid.mods.hydrogen.common.collections.CompactCollectors;
+import me.jellysquid.mods.hydrogen.common.collections.CollectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.model.json.SimpleMultipartModelSelector;
@@ -15,7 +14,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
@@ -53,7 +51,7 @@ public class MixinSimpleMultipartModelSelector {
         if (list != null) {
             CAPTURED_LISTS.remove();
 
-            return CompactCollectors.toSizedList(list.size());
+            return CollectionHelper.toSizedList(list.size());
         }
 
         return Collectors.toList();

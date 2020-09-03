@@ -1,5 +1,6 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model;
 
+import me.jellysquid.mods.hydrogen.common.collections.CollectionHelper;
 import net.minecraft.client.render.model.WeightedBakedModel;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +22,6 @@ public class MixinWeightedBakedModel {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void reinit(List<?> models, CallbackInfo ci) {
-        this.models = new ArrayList<>(this.models);
+        this.models = CollectionHelper.fixed(this.models);
     }
 }
