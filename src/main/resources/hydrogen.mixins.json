@@ -10,13 +10,14 @@
     "client.model.MixinModelLoader",
     "client.model.MixinMultipartBakedModel",
     "client.model.MixinWeightedBakedModel",
+    "client.model.json.MixinAndMultipartModelSelector",
+    "client.model.json.MixinOrMultipartModelSelector",
     "client.model.json.MixinModelOverride",
     "client.model.json.MixinModelOverrideList",
-    "client.model.json.MixinAndMultipartModelSelector",
     "client.model.json.MixinSimpleMultipartModelSelector"
   ],
   "mixins": [
-    "state.MixinState",
-    "nbt.MixinCompoundTag"
+    "nbt.MixinCompoundTag",
+    "state.MixinState"
   ]
 }
