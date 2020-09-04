@@ -17,10 +17,10 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
     private final int rowMask;
     private final int rowCount;
 
-    private C[] columnKeys;
-    private int[] columnIndices;
-    private final int columnMask;
-    private final int columnCount;
+    private C[] colKeys;
+    private int[] colIndices;
+    private final int colMask;
+    private final int colCount;
 
     private V[] values;
     private final int size;
@@ -34,36 +34,36 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
         float loadFactor = Hash.DEFAULT_LOAD_FACTOR;
 
         Set<R> rowKeySet = table.rowKeySet();
-        Set<C> columnKeySet = table.columnKeySet();
+        Set<C> colKeySet = table.columnKeySet();
 
         this.rowCount = rowKeySet.size();
-        this.columnCount = columnKeySet.size();
+        this.colCount = colKeySet.size();
 
         int rowN = arraySize(this.rowCount, loadFactor);
-        int columnN = arraySize(this.columnCount, loadFactor);
+        int colN = arraySize(this.colCount, loadFactor);
 
         this.rowMask = rowN - 1;
         this.rowKeys = (R[]) new Object[rowN];
         this.rowIndices = new int[rowN];
 
-        this.columnMask = columnN - 1;
-        this.columnKeys = (C[]) new Object[columnN];
-        this.columnIndices = new int[columnN];
+        this.colMask = colN - 1;
+        this.colKeys = (C[]) new Object[colN];
+        this.colIndices = new int[colN];
 
-        this.createIndex(this.columnKeys, this.columnIndices, this.columnMask, columnKeySet);
+        this.createIndex(this.colKeys, this.colIndices, this.colMask, colKeySet);
         this.createIndex(this.rowKeys, this.rowIndices, this.rowMask, rowKeySet);
 
-        this.values = (V[]) new Object[this.rowCount * this.columnCount];
+        this.values = (V[]) new Object[this.rowCount * this.colCount];
 
         for (Cell<R, C, V> cell : table.cellSet()) {
-            int keyIdx = this.getIndex(this.columnKeys, this.columnIndices, this.columnMask, cell.getColumnKey());
+            int colIdx = this.getIndex(this.colKeys, this.colIndices, this.colMask, cell.getColumnKey());
             int rowIdx = this.getIndex(this.rowKeys, this.rowIndices, this.rowMask, cell.getRowKey());
 
-            if (keyIdx < 0 || rowIdx < 0) {
+            if (colIdx < 0 || rowIdx < 0) {
                 throw new IllegalStateException("Missing index for " + cell);
             }
 
-            this.values[(this.columnCount * rowIdx) + keyIdx] = cell.getValue();
+            this.values[this.colCount * rowIdx + colIdx] = cell.getValue();
         }
 
         this.size = table.size();
@@ -71,23 +71,24 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
         this.rowKeys = cache.dedupRows(this.rowKeys);
         this.rowIndices = cache.dedupIndices(this.rowIndices);
 
-        this.columnIndices = cache.dedupIndices(this.columnIndices);
-        this.columnKeys = cache.dedupColumns(this.columnKeys);
+        this.colIndices = cache.dedupIndices(this.colIndices);
+        this.colKeys = cache.dedupColumns(this.colKeys);
 
         this.values = cache.dedupValues(this.values);
     }
 
     private <T> void createIndex(T[] keys, int[] indices, int mask, Collection<T> iterable) {
-        int j = 0;
+        int index = 0;
 
         for (T obj : iterable) {
             int i = this.find(keys, mask, obj);
 
             if (i < 0) {
-                keys[i = -i - 1] = obj;
-            }
+                int pos = -i - 1;
 
-            indices[i] = j++;
+                keys[pos] = obj;
+                indices[pos] = index++;
+            }
         }
     }
 
@@ -113,7 +114,7 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
 
     @Override
     public boolean containsColumn(Object columnKey) {
-        return this.find(this.columnKeys, this.columnMask, columnKey) >= 0;
+        return this.find(this.colKeys, this.colMask, columnKey) >= 0;
     }
 
     @Override
@@ -124,13 +125,13 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
     @Override
     public V get(Object rowKey, Object columnKey) {
         final int row = this.getIndex(this.rowKeys, this.rowIndices, this.rowMask, rowKey);
-        final int column = this.getIndex(this.columnKeys, this.columnIndices, this.columnMask, columnKey);
+        final int col = this.getIndex(this.colKeys, this.colIndices, this.colMask, columnKey);
 
-        if (row < 0 || column < 0) {
+        if (row < 0 || col < 0) {
             return null;
         }
 
-        return this.values[(this.columnCount * row) + column];
+        return this.values[this.colCount * row + col];
     }
 
     @Override
@@ -156,12 +157,11 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
     private <T> int find(T[] key, int mask, T value) {
         T curr;
         int pos;
-
         // The starting point.
-        if ((curr = key[pos = HashCommon.mix(System.identityHashCode(value)) & mask]) == null) {
+        if ((curr = key[pos = HashCommon.mix(value.hashCode()) & mask]) == null) {
             return -(pos + 1);
         }
-        if (value == curr) {
+        if (value.equals(curr)) {
             return pos;
         }
         // There's always an unused entry.
@@ -169,7 +169,7 @@ public class FastImmutableTable<R, C, V> implements Table<R, C, V> {
             if ((curr = key[pos = pos + 1 & mask]) == null) {
                 return -(pos + 1);
             }
-            if (value == curr) {
+            if (value.equals(curr)) {
                 return pos;
             }
         }
