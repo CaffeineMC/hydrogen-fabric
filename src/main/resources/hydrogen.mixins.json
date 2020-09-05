@@ -6,11 +6,11 @@
     "defaultRequire": 1
   },
   "client": [
+    "client.model.MixinBakedQuad",
     "client.model.MixinBasicBakedModel",
     "client.model.MixinModelLoader",
     "client.model.MixinMultipartBakedModel",
     "client.model.MixinWeightedBakedModel",
-    "client.model.MixinBakedQuad",
     "client.model.json.MixinAndMultipartModelSelector",
     "client.model.json.MixinModelOverride",
     "client.model.json.MixinModelOverrideList",
@@ -19,6 +19,7 @@
     "util.MixinModelIdentifier"
   ],
   "mixins": [
+    "chunk.MixinWorldChunk",
     "nbt.MixinCompoundTag",
     "state.MixinState",
     "util.MixinIdentifier"
