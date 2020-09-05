@@ -19,6 +19,7 @@
     "util.MixinModelIdentifier"
   ],
   "mixins": [
+    "chunk.MixinBiomeArray",
     "chunk.MixinWorldChunk",
     "nbt.MixinCompoundTag",
     "state.MixinState",
