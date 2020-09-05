@@ -20,6 +20,7 @@
   ],
   "mixins": [
     "chunk.MixinBiomeArray",
+    "chunk.MixinChunkSerializer",
     "chunk.MixinWorldChunk",
     "nbt.MixinCompoundTag",
     "state.MixinState",
