@@ -21,12 +21,12 @@ an experiment. Please keep that in mind.
 
 ### Building from source
 
-If you're hacking on the code or would like to compile a custom build of Lithium from the latest sources, you'll want
+If you're hacking on the code or would like to compile a custom build of Hydrogen from the latest sources, you'll want
 to start here.
 
 #### Prerequisites
 
-You will need to install JDK 8 in order to build Lithium. You can either install this through a package manager such as
+You will need to install JDK 8 in order to build Hydrogen. You can either install this through a package manager such as
 [Chocolatey](https://chocolatey.org/) on Windows or [SDKMAN!](https://sdkman.io/) on other platforms. If you'd prefer to
 not use a package manager, you can always grab the installers or packages directly from
 [AdoptOpenJDK](https://adoptopenjdk.net/).
