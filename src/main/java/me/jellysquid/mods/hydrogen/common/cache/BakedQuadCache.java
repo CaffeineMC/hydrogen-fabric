@@ -1,5 +1,7 @@
 package me.jellysquid.mods.hydrogen.common.cache;
 
+import java.util.Arrays;
+
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 public class BakedQuadCache {
