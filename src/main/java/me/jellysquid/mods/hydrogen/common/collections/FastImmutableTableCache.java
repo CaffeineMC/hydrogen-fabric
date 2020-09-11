@@ -1,16 +1,25 @@
 package me.jellysquid.mods.hydrogen.common.collections;
 
 import it.unimi.dsi.fastutil.Hash;
+import it.unimi.dsi.fastutil.ints.IntArrays;
+import it.unimi.dsi.fastutil.objects.ObjectArrays;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 
-import java.util.Arrays;
-
 public class FastImmutableTableCache<R, C, V> {
-    private final ObjectOpenCustomHashSet<R[]> rows = new ObjectOpenCustomHashSet<>(new ObjectArrayEqualityStrategy<>());
-    private final ObjectOpenCustomHashSet<C[]> columns = new ObjectOpenCustomHashSet<>(new ObjectArrayEqualityStrategy<>());
-    private final ObjectOpenCustomHashSet<V[]> values = new ObjectOpenCustomHashSet<>(new ObjectArrayEqualityStrategy<>());
+    private final ObjectOpenCustomHashSet<R[]> rows;
+    private final ObjectOpenCustomHashSet<C[]> columns;
+    private final ObjectOpenCustomHashSet<V[]> values;
 
-    private final ObjectOpenCustomHashSet<int[]> indices = new ObjectOpenCustomHashSet<>(new IntArrayEqualityStrategy());
+    private final ObjectOpenCustomHashSet<int[]> indices;
+
+    @SuppressWarnings("unchecked")
+    public FastImmutableTableCache() {
+        this.rows = new ObjectOpenCustomHashSet<>((Hash.Strategy<R[]>) ObjectArrays.HASH_STRATEGY);
+        this.columns = new ObjectOpenCustomHashSet<>((Hash.Strategy<C[]>) ObjectArrays.HASH_STRATEGY);
+        this.values = new ObjectOpenCustomHashSet<>((Hash.Strategy<V[]>) ObjectArrays.HASH_STRATEGY);
+
+        this.indices = new ObjectOpenCustomHashSet<>(IntArrays.HASH_STRATEGY);
+    }
 
     public synchronized V[] dedupValues(V[] values) {
         return this.values.addOrGet(values);
@@ -27,29 +36,4 @@ public class FastImmutableTableCache<R, C, V> {
     public synchronized int[] dedupIndices(int[] ints) {
         return this.indices.addOrGet(ints);
     }
-
-    private static class ObjectArrayEqualityStrategy<T> implements Hash.Strategy<T[]> {
-        @Override
-        public int hashCode(T[] o) {
-            return Arrays.hashCode(o);
-        }
-
-        @Override
-        public boolean equals(T[] a, T[] b) {
-            return Arrays.equals(a, b);
-        }
-    }
-
-    private static class IntArrayEqualityStrategy implements Hash.Strategy<int[]> {
-        @Override
-        public int hashCode(int[] o) {
-            return Arrays.hashCode(o);
-        }
-
-        @Override
-        public boolean equals(int[] a, int[] b) {
-            return Arrays.equals(a, b);
-        }
-    }
-
 }
