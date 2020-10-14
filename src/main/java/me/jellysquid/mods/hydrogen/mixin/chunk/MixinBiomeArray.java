@@ -2,6 +2,8 @@ package me.jellysquid.mods.hydrogen.mixin.chunk;
 
 import it.unimi.dsi.fastutil.objects.Reference2ShortMap;
 import it.unimi.dsi.fastutil.objects.Reference2ShortOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.util.collection.IndexedIterable;
 import net.minecraft.util.collection.PackedIntegerArray;
 import net.minecraft.util.math.ChunkPos;
@@ -47,6 +49,7 @@ public class MixinBiomeArray {
         this.createCompact();
     }
 
+    @Environment(EnvType.CLIENT)
     @Inject(method = "<init>(Lnet/minecraft/util/collection/IndexedIterable;[I)V", at = @At("RETURN"))
     private void reinit1(IndexedIterable<Biome> indexedIterable, int[] is, CallbackInfo ci) {
         this.createCompact();
