@@ -15,15 +15,13 @@
     "client.model.json.MixinModelOverride",
     "client.model.json.MixinModelOverrideList",
     "client.model.json.MixinOrMultipartModelSelector",
-    "client.model.json.MixinSimpleMultipartModelSelector",
-    "util.MixinModelIdentifier"
+    "client.model.json.MixinSimpleMultipartModelSelector"
   ],
   "mixins": [
     "chunk.MixinBiomeArray",
     "chunk.MixinChunkSerializer",
     "chunk.MixinWorldChunk",
     "nbt.MixinCompoundTag",
-    "state.MixinState",
-    "util.MixinIdentifier"
+    "state.MixinState"
   ]
 }
