@@ -5,6 +5,11 @@ import it.unimi.dsi.fastutil.ints.IntArrays;
 import it.unimi.dsi.fastutil.objects.ObjectArrays;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 
+/**
+ * @param <R> The type used by the
+ * @param <C>
+ * @param <V>
+ */
 public class FastImmutableTableCache<R, C, V> {
     private final ObjectOpenCustomHashSet<R[]> rows;
     private final ObjectOpenCustomHashSet<C[]> columns;
