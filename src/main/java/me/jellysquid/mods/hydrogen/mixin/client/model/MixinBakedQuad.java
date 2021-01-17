@@ -1,6 +1,6 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model;
 
-import me.jellysquid.mods.hydrogen.common.cache.BakedQuadCache;
+import me.jellysquid.mods.hydrogen.client.resource.ModelCaches;
 import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.util.math.Direction;
@@ -21,6 +21,6 @@ public class MixinBakedQuad {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void reinit(int[] vertexData, int colorIndex, Direction face, Sprite sprite, boolean shade, CallbackInfo ci) {
-        this.vertexData = BakedQuadCache.dedup(this.vertexData);
+        this.vertexData = ModelCaches.QUADS.deduplicate(this.vertexData);
     }
 }
