@@ -24,6 +24,7 @@
   "accessWidener": "hydrogen.accesswidener",
   "depends": {
     "fabricloader": ">=0.9.0",
+    "fabric-resource-loader-v0": ">=0.4",
     "minecraft": "1.16.5"
   }
 }
