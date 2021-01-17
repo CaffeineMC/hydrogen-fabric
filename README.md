@@ -12,6 +12,13 @@ offer (small) improvements even in lightly modded or vanilla scenarios.
 The mod works on both the **client and server**, and **doesn't require the mod to be installed
 on both sides**. However, the benefits of running Hydrogen on the server are pretty small as of the moment.
 
+#### Why are these patches not in [Lithium](https://github.com/jellysquid3/lithium-fabric)?
+
+Hydrogen relies on rather egregious hacks in order to load some code into the game, primarily because the Guava
+library developers really do not want people re-implementing their interfaces. These hacks are "safe" in the sense
+that the game will simply fail to start if a problem occurs, but are really rather not suitable for the standards
+which Lithium intends to promote. In other words, this mod could be looked at as "things too dirty to put in Lithium."
+
 ### Installation instructions
 
 Hydrogen relies on the [Fabric Loader](https://fabricmc.net/use). Users should select Fabric for either the Minecraft launcher (client) or
