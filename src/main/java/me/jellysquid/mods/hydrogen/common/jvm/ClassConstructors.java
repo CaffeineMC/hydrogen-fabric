@@ -2,7 +2,6 @@ package me.jellysquid.mods.hydrogen.common.jvm;
 
 import com.google.common.collect.ImmutableMap;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
@@ -19,12 +18,13 @@ public class ClassConstructors {
     }
 
     private static void initGuavaExtensions() throws ReflectiveOperationException {
-        ClassLoader loader = ImmutableMap.class.getClassLoader();
+        Class<?> classInTarget = ImmutableMap.class;
+        ClassLoader loader = classInTarget.getClassLoader();
 
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenImmutableMapEntry");
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenImmutableReferenceHashMap");
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenEntrySet");
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenEntrySetIterator");
+        ClassDefineTool.defineClass(classInTarget, "com.google.common.collect.HydrogenImmutableMapEntry");
+        ClassDefineTool.defineClass(classInTarget, "com.google.common.collect.HydrogenEntrySetIterator");
+        ClassDefineTool.defineClass(classInTarget, "com.google.common.collect.HydrogenEntrySet");
+        ClassDefineTool.defineClass(classInTarget, "com.google.common.collect.HydrogenImmutableReferenceHashMap");
 
         FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR = (Constructor<ImmutableMap<?, ?>>)
                 loader.loadClass("com.google.common.collect.HydrogenImmutableReferenceHashMap")
