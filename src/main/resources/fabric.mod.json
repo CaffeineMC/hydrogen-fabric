@@ -20,6 +20,9 @@
   "entrypoints": {
     "preLaunch": [
       "me.jellysquid.mods.hydrogen.common.HydrogenPreLaunch"
+    ],
+    "client": [
+      "me.jellysquid.mods.hydrogen.client.HydrogenClient"
     ]
   },
   "accessWidener": "hydrogen.accesswidener",
