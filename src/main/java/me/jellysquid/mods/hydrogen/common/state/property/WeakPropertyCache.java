@@ -26,10 +26,8 @@ public class WeakPropertyCache {
             // Checked by the property's equals method in MapKeyGetter#equals
             T originalKey = (T) MapKeyGetter.getOriginalKey(CACHE, newProperty);
             if (originalKey != null) {
-                System.err.println("Got \"" + originalKey + "\" from cache!");
                 return originalKey;
             } else {
-                System.err.println("Caching \"" + newProperty + "\"");
                 CACHE.put(newProperty, null);
                 return newProperty;
             }
