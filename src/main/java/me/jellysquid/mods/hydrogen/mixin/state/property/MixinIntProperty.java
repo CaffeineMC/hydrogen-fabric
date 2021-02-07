@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(IntProperty.class)
 public class MixinIntProperty {
     @Inject(method = "of", at = @At("TAIL"), cancellable = true)
-    private static void internOf(String name, int min, int max, CallbackInfoReturnable<IntProperty> cir) {
+    private static void internOf(CallbackInfoReturnable<IntProperty> cir) {
         cir.setReturnValue(WeakPropertyCache.tryCacheProperty(cir.getReturnValue()));
     }
 }
