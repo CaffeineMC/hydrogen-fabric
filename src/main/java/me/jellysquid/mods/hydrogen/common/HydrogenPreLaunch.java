@@ -5,6 +5,7 @@ import me.jellysquid.mods.hydrogen.common.jvm.ClassConstructors;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
+import net.minecraft.state.property.BooleanProperty;
 
 public class HydrogenPreLaunch implements PreLaunchEntrypoint {
     @Override
@@ -14,5 +15,8 @@ public class HydrogenPreLaunch implements PreLaunchEntrypoint {
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             HydrogenClientPreLaunch.init();
         }
+
+        if (BooleanProperty.of("test") == BooleanProperty.of("test"))
+            System.err.println("Working!");
     }
 }

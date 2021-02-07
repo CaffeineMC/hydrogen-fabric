@@ -23,6 +23,8 @@
     "chunk.MixinWorldChunk",
     "nbt.MixinCompoundTag",
     "state.MixinState",
-    "state.property.MixinBooleanProperty"
+    "state.property.MixinBooleanProperty",
+    "state.property.MixinDirectionProperty",
+    "state.property.MixinIntProperty"
   ]
 }
