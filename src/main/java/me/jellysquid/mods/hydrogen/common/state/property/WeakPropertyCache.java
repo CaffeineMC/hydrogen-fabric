@@ -21,6 +21,14 @@ public class WeakPropertyCache {
      */
     @SuppressWarnings("unchecked")
     public static <T extends Property<?>> T tryCacheProperty(T newProperty) {
-        return (T) CACHE.computeIfAbsent(newProperty, WeakReference::new).get();
+        T cachedProperty = (T) CACHE.computeIfAbsent(newProperty, WeakReference::new).get();
+
+        // Check if the reference was cleared by GC before WeakReference::get() was called.
+        if (cachedProperty == null) {
+            CACHE.put(newProperty, new WeakReference<>(newProperty));
+            return newProperty;
+        } else {
+            return cachedProperty;
+        }
     }
 }
