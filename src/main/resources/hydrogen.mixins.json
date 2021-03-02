@@ -25,6 +25,7 @@
     "state.MixinState",
     "state.property.MixinBooleanProperty",
     "state.property.MixinDirectionProperty",
+    "state.property.MixinEnumProperty",
     "state.property.MixinIntProperty"
   ]
 }
