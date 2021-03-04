@@ -103,7 +103,7 @@ public class FixedArrayList<T> implements List<T> {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        Arrays.fill(this.array, -1)
     }
 
     @Override
