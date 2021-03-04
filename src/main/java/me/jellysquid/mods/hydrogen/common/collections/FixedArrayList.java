@@ -6,7 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.util.*;
 
 public class FixedArrayList<T> implements List<T> {
-    private final T[] array;
+    private T[] array;
 
     @SuppressWarnings("unchecked")
     public FixedArrayList(List<T> list) {
@@ -103,7 +103,8 @@ public class FixedArrayList<T> implements List<T> {
 
     @Override
     public void clear() {
-        Arrays.fill(this.array, null)
+        Arrays.fill(this.array, null);
+        this.array = (T[]) new Object[this.array.length]
     }
 
     @Override
