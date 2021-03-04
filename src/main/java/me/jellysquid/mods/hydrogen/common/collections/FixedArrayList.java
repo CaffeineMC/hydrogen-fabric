@@ -103,7 +103,7 @@ public class FixedArrayList<T> implements List<T> {
 
     @Override
     public void clear() {
-        Arrays.fill(this.array, -1)
+        Arrays.fill(this.array, null)
     }
 
     @Override
