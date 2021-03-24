@@ -3,7 +3,7 @@
   "id": "hydrogen",
   "version": "${version}",
   "name": "Hydrogen",
-  "description": "A Minecraft mod designed to reduce the memory usage of the game.",
+  "description": "A free and open-source optimization mod for Minecraft designed to reduce the memory usage of the game.",
   "authors": [
     "JellySquid"
   ],
