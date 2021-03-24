@@ -18,38 +18,49 @@ Hydrogen relies on rather egregious hacks in order to load some code into the ga
 library developers really do not want people re-implementing their interfaces. These hacks are "safe" in the sense
 that the game will simply fail to start if a problem occurs, but are really rather not suitable for the standards
 which Lithium intends to promote. In other words, this mod could be looked at as "things too dirty to put in Lithium."
+
+---
+
 ## Installation
 
-### Stable releases
+### Manual installation (recommended)
 
-#### Manual Installation (recommended)
+You will need Fabric Loader 0.10.x or newer installed in your game in order to load Hydrogen. If you haven't installed
+Fabric mods before, you can find a variety of community guides for doing so [here](https://fabricmc.net/wiki/install).
 
-The latest releases of Hydrogen are published to our [official Modrinth page](https://modrinth.com/mod/hydrogen) and [GitHub releases page](https://github.com/jellysquid3/hydrogen-fabric/releases). Usually, builds will be
-made available on GitHub slightly sooner than other locations.
+#### Stable releases
 
-You will need Fabric Loader 0.10.x or newer installed in your game in order to load Hydrogen. If you haven't installed Fabric
-mods before, you can find a variety of community guides for doing so [here](https://fabricmc.net/wiki/install).
+![GitHub release](https://img.shields.io/github/release/CaffeineMC/hydrogen-fabric.svg)
 
+The latest releases of Hydrogen are published to our [Modrinth](https://modrinth.com/mods/hydrogen) and
+[GitHub release](https://github.com/CaffeineMC/hydrogen-fabric/releases) pages. Releases are considered by our team to be
+**suitable for general use**, but they are not guaranteed to be free of bugs and other issues.
 
-### Bleeding-edge builds
+Usually, releases will be made available on GitHub slightly sooner than other locations.
 
-If you are a player who is looking to get your hands on the latest **bleeding-edge builds for testing**, consider
-taking a look at the builds produced through our [GitHub Actions workflow](https://github.com/CaffeineMC/hydrogen-fabric/actions/workflows/gradle.yml). This
-workflow automatically runs every time a change is pushed to the repository, and as such, they will reflect the latest
-state of development.
+#### Bleeding-edge builds (unstable)
+
+[![GitHub build status](https://img.shields.io/github/workflow/status/CaffeineMC/hydrogen-fabric/Java CI with Gradle/1.16.x/dev)](https://github.com/CaffeineMC/hydrogen-fabric/actions/workflows/gradle.yml)
+
+If you are a player who is looking to get your hands on the latest **bleeding-edge changes for testing**, consider
+taking a look at the automated builds produced through our [GitHub Actions workflow](https://github.com/CaffeineMC/hydrogen-fabric/actions/workflows/gradle.yml?query=event%3Apush).
+This workflow automatically runs every time a change is pushed to the repository, and as such, the builds it produces
+will generally reflect the latest snapshot of development.
 
 Bleeding edge builds will often include unfinished code that hasn't been extensively tested. That code may introduce
 incomplete features, bugs, crashes, and all other kinds of weird issues. You **should not use these bleeding edge builds**
 unless you know what you are doing and are comfortable with software debugging. If you report issues using these builds,
 we will expect that this is the case. Caveat emptor.
 
+---
+
 ### Reporting Issues
 
-You can report bugs and crashes by opening an issue on our [issue tracker](https://github.com/jellysquid3/hydrogen-fabric/issues).
-Before opening a new issue, please check using the search tool that your issue has not already been created.
+You can report bugs and crashes by opening an issue on our [issue tracker](https://github.com/CaffeineMC/hydrogen-fabric/issues).
+Before opening a new issue, use the search tool to make sure that your issue has not already been reported.
 
 ### Community
-[![Discord chat](https://img.shields.io/badge/chat%20on-discord-7289DA)](https://jellysquid.me/discord)
+[![Discord chat](https://img.shields.io/badge/chat%20on-discord-7289DA?logo=discord&logoColor=white)](https://jellysquid.me/discord)
 
 We have an [official Discord community](https://jellysquid.me/discord) for all of our projects. By joining, you can:
 - Get installation help and technical support with all of our mods 
@@ -57,7 +68,13 @@ We have an [official Discord community](https://jellysquid.me/discord) for all o
 - Get involved and collaborate with the rest of our team
 - ... and just hang out with the rest of our community.
 
+---
+
 ### Building from sources
+
+Support is not provided for setting up build environments or compiling the mod. We ask that
+users who are looking to get their hands dirty with the code have a basic understanding of compiling Java/Gradle
+projects. The basic overview is provided here for those familiar.
 
 #### Requirements
 
@@ -75,26 +92,23 @@ customize this behavior on a system-wide level, please see [Gradle's Toolchain u
 
 #### Building with Gradle
 
-Hydrogen uses a typical Gradle project structure and can be built by simply running the default `build` task.
+Hydrogen uses a typical Gradle project structure and can be built by simply running the default `build` task. After Gradle
+finishes building the project, you can find the build artifacts (typical mod binaries, and their sources) in
+`build/libs`.
 
-**Tip:** If this is a one-off build, and you would prefer the Gradle daemon does not stick around in memory afterwards 
-(often consuming upwards of 1 GiB), then you can use the [`--no-daemon` argument](https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:disabling_the_daemon)
-to ensure that the daemon is torn down after the build is complete. However, subsequent Gradle builds will
+**Tip:** If this is a one-off build, and you would prefer the Gradle daemon does not stick around in memory afterwards,
+try adding the [`--no-daemon` flag](https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:disabling_the_daemon)
+to ensure that the daemon is torn down after the build is complete. However, subsequent builds of the project will
 [start more slowly](https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:why_the_daemon) if the Gradle
-daemon is not sitting warm and loaded in memory.
+daemon is not available to be re-used.
 
-After Gradle finishes building the project, the resulting build artifacts (your usual mod binaries, and
-their sources) can be found in `build/libs`.
 
-Build artifacts classified with `dev` are outputs containing the sources and compiled classes
+Build artifacts ending in `dev` are outputs containing the sources and compiled classes
 before they are remapped into stable intermediary names. If you are working in a developer environment and would
 like to add the mod to your game, you should prefer to use the `modRuntime` or `modCompile` configurations provided by
 Loom instead of these outputs.
 
-Please note that support is not provided for setting up build environments or compiling the mod. We ask that
-users who are looking to get their hands dirty with the code have a basic understanding of compiling Java/Gradle
-projects.
-
+---
 ### License
 
 Hydrogen is licensed under GNU LGPLv3, a free and open-source license. For more information, please see the
