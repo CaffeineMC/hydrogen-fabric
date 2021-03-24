@@ -24,10 +24,10 @@ which Lithium intends to promote. In other words, this mod could be looked at as
 
 #### Manual Installation (recommended)
 
-The latest releases of Sodium are published to our [official Modrinth page](https://modrinth.com/mod/hydrogen) and [GitHub releases page](https://github.com/jellysquid3/hydrogen-fabric/releases). Usually, builds will be
+The latest releases of Hydrogen are published to our [official Modrinth page](https://modrinth.com/mod/hydrogen) and [GitHub releases page](https://github.com/jellysquid3/hydrogen-fabric/releases). Usually, builds will be
 made available on GitHub slightly sooner than other locations.
 
-You will need Fabric Loader 0.10.x or newer installed in your game in order to load Sodium. If you haven't installed Fabric
+You will need Fabric Loader 0.10.x or newer installed in your game in order to load Hydrogen. If you haven't installed Fabric
 mods before, you can find a variety of community guides for doing so [here](https://fabricmc.net/wiki/install).
 
 
@@ -75,7 +75,7 @@ customize this behavior on a system-wide level, please see [Gradle's Toolchain u
 
 #### Building with Gradle
 
-Sodium uses a typical Gradle project structure and can be built by simply running the default `build` task.
+Hydrogen uses a typical Gradle project structure and can be built by simply running the default `build` task.
 
 **Tip:** If this is a one-off build, and you would prefer the Gradle daemon does not stick around in memory afterwards 
 (often consuming upwards of 1 GiB), then you can use the [`--no-daemon` argument](https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:disabling_the_daemon)
