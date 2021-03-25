@@ -3,7 +3,7 @@
 # Hydrogen (for Fabric)
 ![GitHub license](https://img.shields.io/github/license/CaffeineMC/hydrogen-fabric.svg)
 ![GitHub issues](https://img.shields.io/github/issues/CaffeineMC/hydrogen-fabric.svg)
-![GitHub tag](https://img.shields.io/github/tag/CaffeineMC/hydrogen-fabric.svg)
+![GitHub tag](https://img.shields.io/github/v/tag/CaffeineMC/hydrogen-fabric.svg)
 
 Hydrogen is a free and open-source mod designed to reduce the game's memory requirements by implementing more
 memory-efficient data structures and logic. It's primarily designed for more heavily modded scenarios, but can
