@@ -1,9 +1,9 @@
 ![Project icon](src/main/resources/assets/hydrogen/icon.png?raw=true)
 
 # Hydrogen (for Fabric)
-![GitHub license](https://img.shields.io/github/license/jellysquid3/hydrogen-fabric.svg)
-![GitHub issues](https://img.shields.io/github/issues/jellysquid3/hydrogen-fabric.svg)
-![GitHub tag](https://img.shields.io/github/tag/jellysquid3/hydrogen-fabric.svg)
+![GitHub license](https://img.shields.io/github/license/CaffeineMC/hydrogen-fabric.svg)
+![GitHub issues](https://img.shields.io/github/issues/CaffeineMC/hydrogen-fabric.svg)
+![GitHub tag](https://img.shields.io/github/tag/CaffeineMC/hydrogen-fabric.svg)
 
 Hydrogen is a free and open-source mod designed to reduce the game's memory requirements by implementing more
 memory-efficient data structures and logic. It's primarily designed for more heavily modded scenarios, but can
@@ -12,7 +12,7 @@ offer (small) improvements even in lightly modded or vanilla scenarios.
 The mod works on both the **client and server**, and **doesn't require the mod to be installed
 on both sides**. However, the benefits of running Hydrogen on the server are pretty small as of the moment.
 
-#### Why are these patches not in [Lithium](https://github.com/jellysquid3/lithium-fabric)?
+#### Why are these patches not in [Lithium](https://github.com/CaffeineMC/lithium-fabric)?
 
 Hydrogen relies on rather egregious hacks in order to load some code into the game, primarily because the Guava
 library developers really do not want people re-implementing their interfaces. These hacks are "safe" in the sense
@@ -112,4 +112,4 @@ Loom instead of these outputs.
 ### License
 
 Hydrogen is licensed under GNU LGPLv3, a free and open-source license. For more information, please see the
-[license file](https://github.com/jellysquid3/hydrogen-fabric/blob/1.16.x/dev/LICENSE.txt).
+[license file](https://github.com/CaffeineMC/hydrogen-fabric/blob/1.16.x/dev/LICENSE.txt).
