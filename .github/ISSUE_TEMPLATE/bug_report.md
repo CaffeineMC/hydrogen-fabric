@@ -59,7 +59,6 @@ everything above this dashed line (including the line itself.)
 > 
 > - Java Version: [fill me in]
 > - CPU: [fill me in]
-> - GPU: [fill me in]
 
 ### Other Information
 
