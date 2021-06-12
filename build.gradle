@@ -1,9 +1,9 @@
 plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT'
+    id 'fabric-loom' version '0.8-SNAPSHOT'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = "${project.archives_base_name}-mc${project.minecraft_version}"
 group = project.maven_group
@@ -29,19 +29,19 @@ dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
 }
 
 repositories {
-	maven { url = "https://jitpack.io" }
+	maven { url = "https://maven.gegy.dev" }
 }
 
 dependencies {
 	// DataBreaker applies a number of patches to eliminate the loading of data fixers
 	// This greatly reduces the amount of time needed to start the game, but is generally unsafe in production
-	modRuntime ("com.github.SuperCoder7979:databreaker:0.2.6") {
+	modRuntime ("supercoder79:databreaker:${project.databreaker_version}") {
 		transitive = false
 	}
 }
