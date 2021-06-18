@@ -13,12 +13,14 @@
     "client.model.MixinWeightedBakedModel",
     "client.model.json.MixinAndMultipartModelSelector",
     "client.model.json.MixinOrMultipartModelSelector",
-    "client.model.json.MixinSimpleMultipartModelSelector"
+    "client.model.json.MixinSimpleMultipartModelSelector",
+    "client.model.MixinModelIdentifier"
   ],
   "mixins": [
     "chunk.MixinChunkSerializer",
     "chunk.MixinWorldChunk",
     "nbt.MixinNbtCompound",
-    "state.MixinState"
+    "state.MixinState",
+    "util.MixinIdentifier"
   ]
 }

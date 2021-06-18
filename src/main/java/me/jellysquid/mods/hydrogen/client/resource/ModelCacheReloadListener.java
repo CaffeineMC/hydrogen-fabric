@@ -1,6 +1,7 @@
 package me.jellysquid.mods.hydrogen.client.resource;
 
 import com.google.common.collect.Lists;
+import me.jellysquid.mods.hydrogen.common.dedup.IdentifierCaches;
 import net.fabricmc.fabric.api.resource.ResourceReloadListenerKeys;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
@@ -22,6 +23,7 @@ public class ModelCacheReloadListener implements SimpleResourceReloadListener<Vo
     @Override
     public CompletableFuture<Void> apply(Void data, ResourceManager manager, Profiler profiler, Executor executor) {
         ModelCaches.printDebug();
+        IdentifierCaches.printDebug();
 
         return CompletableFuture.completedFuture(null);
     }
