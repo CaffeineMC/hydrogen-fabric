@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Map;
 
 @Mixin(NbtCompound.class)
-public class MixinCompoundTag {
+public class MixinNbtCompound {
     @Mutable
     @Shadow
     @Final

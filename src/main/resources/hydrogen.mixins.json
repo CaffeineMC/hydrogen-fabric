@@ -18,7 +18,7 @@
   "mixins": [
     "chunk.MixinChunkSerializer",
     "chunk.MixinWorldChunk",
-    "nbt.MixinCompoundTag",
+    "nbt.MixinNbtCompound",
     "state.MixinState"
   ]
 }
