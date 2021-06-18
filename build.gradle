@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT'
+    id 'fabric-loom' version '0.7-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -22,14 +22,13 @@ if (build_id != null) {
 
 minecraft {
     refmapName = "mixins.hydrogen.refmap.json"
-	accessWidener = file("src/main/resources/hydrogen.accesswidener")
 }
 
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
 }
@@ -38,25 +37,25 @@ repositories {
 	maven { url = "https://jitpack.io" }
 }
 
-dependencies {
-	// DataBreaker applies a number of patches to eliminate the loading of data fixers
-	// This greatly reduces the amount of time needed to start the game, but is generally unsafe in production
-	modRuntime ("com.github.SuperCoder7979:databreaker:0.2.6") {
-		transitive = false
+if (project.use_third_party_mods) {
+	repositories {
+		maven { url = "https://maven.gegy.dev" }
+	}
+
+	dependencies {
+		// DataBreaker applies a number of patches to eliminate the loading of data fixers
+		// This greatly reduces the amount of time needed to start the game, but is generally unsafe in production
+		modRuntime ("supercoder79:databreaker:${project.databreaker_version}") {
+			transitive = false
+		}
 	}
 }
 
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
 	}
 }
 

@@ -1,7 +1,9 @@
 package me.jellysquid.mods.hydrogen.mixin.client.model;
 
 import me.jellysquid.mods.hydrogen.common.collections.CollectionHelper;
+import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.WeightedBakedModel;
+import net.minecraft.util.collection.Weighted;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -18,7 +20,7 @@ public class MixinWeightedBakedModel {
     @Mutable
     @Shadow
     @Final
-    private List<WeightedBakedModel.Entry> models;
+    private List<Weighted.Present<BakedModel>> models;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void reinit(List<?> models, CallbackInfo ci) {

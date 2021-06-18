@@ -2,39 +2,42 @@ package me.jellysquid.mods.hydrogen.common.jvm;
 
 import com.google.common.collect.ImmutableMap;
 
-import java.io.IOException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class ClassConstructors {
-    private static Constructor<ImmutableMap<?, ?>> FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR;
+    private static MethodHandle FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR;
 
     public static void init() {
-        try {
-            initGuavaExtensions();
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException("Couldn't perform gross class loading hacks", e);
-        }
+        initGuavaExtensions();
     }
 
-    private static void initGuavaExtensions() throws ReflectiveOperationException {
-        ClassLoader loader = ImmutableMap.class.getClassLoader();
+    private static void initGuavaExtensions() {
+        // define classes in their reverse link order to prevent duplicate definition issues
+        ClassDefineTool.defineClass(ImmutableMap.class, "com.google.common.collect.HydrogenImmutableMapEntry");
+        ClassDefineTool.defineClass(ImmutableMap.class, "com.google.common.collect.HydrogenEntrySetIterator");
+        ClassDefineTool.defineClass(ImmutableMap.class, "com.google.common.collect.HydrogenEntrySet");
 
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenImmutableMapEntry");
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenImmutableReferenceHashMap");
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenEntrySet");
-        ClassDefineTool.defineClass(loader, "com.google.common.collect.HydrogenEntrySetIterator");
+        Class<?> immutableRefHashMapClass = ClassDefineTool.defineClass(ImmutableMap.class, "com.google.common.collect.HydrogenImmutableReferenceHashMap");
 
-        FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR = (Constructor<ImmutableMap<?, ?>>)
-                loader.loadClass("com.google.common.collect.HydrogenImmutableReferenceHashMap")
-                        .getDeclaredConstructor(Map.class);
+        try {
+            FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR = MethodHandles.lookup()
+                    .findConstructor(immutableRefHashMapClass, MethodType.methodType(Void.TYPE, Map.class))
+                    // compiler can only generate a desc returning ImmutableMap below
+                    .asType(MethodType.methodType(ImmutableMap.class, Map.class));
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException("Failed to find constructor", e);
+        }
     }
 
     public static <K, V> ImmutableMap<K, V> createFastImmutableMap(Map<K, V> orig) {
         try {
-            return (ImmutableMap<K, V>) FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR.newInstance(orig);
-        } catch (ReflectiveOperationException e) {
+            return (ImmutableMap<K, V>) FAST_IMMUTABLE_REFERENCE_HASH_MAP_CONSTRUCTOR.invokeExact((Map<K, V>) orig);
+        } catch (Throwable e) {
             throw new RuntimeException("Could not instantiate collection", e);
         }
     }

@@ -34,6 +34,7 @@ public class MixinSimpleMultipartModelSelector {
 
     /**
      * @author JellySquid
+     * @reason De-duplication
      */
     @Overwrite
     public Predicate<BlockState> getPredicate(StateManager<Block, BlockState> stateManager) {

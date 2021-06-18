@@ -12,13 +12,10 @@
     "client.model.MixinMultipartBakedModel",
     "client.model.MixinWeightedBakedModel",
     "client.model.json.MixinAndMultipartModelSelector",
-    "client.model.json.MixinModelOverride",
-    "client.model.json.MixinModelOverrideList",
     "client.model.json.MixinOrMultipartModelSelector",
     "client.model.json.MixinSimpleMultipartModelSelector"
   ],
   "mixins": [
-    "chunk.MixinBiomeArray",
     "chunk.MixinChunkSerializer",
     "chunk.MixinWorldChunk",
     "nbt.MixinCompoundTag",
