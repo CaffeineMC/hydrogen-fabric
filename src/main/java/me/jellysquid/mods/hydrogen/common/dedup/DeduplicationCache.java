@@ -6,16 +6,17 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 import java.util.Objects;
 
 public class DeduplicationCache<T> {
-    private final ObjectOpenCustomHashSet<T> cache;
+    private final ObjectOpenCustomHashSet<T> pool;
 
     private int attemptedInsertions = 0;
+    private int deduplicated = 0;
 
     public DeduplicationCache(Hash.Strategy<T> strategy) {
-        this.cache = new ObjectOpenCustomHashSet<>(strategy);
+        this.pool = new ObjectOpenCustomHashSet<>(strategy);
     }
 
     public DeduplicationCache() {
-        this.cache = new ObjectOpenCustomHashSet<>(new Hash.Strategy<T>() {
+        this.pool = new ObjectOpenCustomHashSet<>(new Hash.Strategy<T>() {
             @Override
             public int hashCode(T o) {
                 return Objects.hashCode(o);
@@ -31,26 +32,25 @@ public class DeduplicationCache<T> {
     public synchronized T deduplicate(T item) {
         this.attemptedInsertions++;
 
-        return this.cache.addOrGet(item);
+        T result = this.pool.addOrGet(item);
+
+        if (result != item) {
+            this.deduplicated++;
+        }
+
+        return result;
     }
 
     public synchronized void clearCache() {
         this.attemptedInsertions = 0;
+        this.deduplicated = 0;
 
-        this.cache.clear();
-    }
-
-    public synchronized int getSize() {
-        return this.cache.size();
-    }
-
-    public synchronized int getDeduplicatedCount() {
-        return this.attemptedInsertions - this.cache.size();
+        this.pool.clear();
     }
 
     @Override
     public synchronized String toString() {
-        return String.format("DeduplicationCache ( %d de-duplicated, %d entries )",
-                this.getDeduplicatedCount(), this.getSize());
+        return String.format("DeduplicationCache ( %d/%d de-duplicated, %d pooled )",
+                this.deduplicated, this.attemptedInsertions, this.pool.size());
     }
 }
