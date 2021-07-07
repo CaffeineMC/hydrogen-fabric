@@ -28,6 +28,6 @@
   "depends": {
     "fabricloader": ">=0.11.0",
     "fabric-resource-loader-v0": ">=0.4",
-    "minecraft": "1.17"
+    "minecraft": ["1.17", "1.17.1"]
   }
 }
