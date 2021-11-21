@@ -17,7 +17,6 @@
     "client.model.MixinModelIdentifier"
   ],
   "mixins": [
-    "chunk.MixinWorldChunk",
     "nbt.MixinNbtCompound",
     "state.MixinState",
     "util.MixinIdentifier"
