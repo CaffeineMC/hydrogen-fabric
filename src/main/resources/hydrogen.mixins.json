@@ -17,7 +17,6 @@
     "client.model.MixinModelIdentifier"
   ],
   "mixins": [
-    "chunk.MixinChunkSerializer",
     "chunk.MixinWorldChunk",
     "nbt.MixinNbtCompound",
     "state.MixinState",
