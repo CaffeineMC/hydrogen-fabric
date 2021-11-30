@@ -26,9 +26,9 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.12.0",
+    "fabricloader": ">=0.12.5",
     "fabric-resource-loader-v0": ">=0.4",
-    "minecraft": [">=1.18-beta.4"]
+    "minecraft": [">=1.18-beta.4 <=1.18" ]
   },
   "breaks": {
     "optifabric": "*"
