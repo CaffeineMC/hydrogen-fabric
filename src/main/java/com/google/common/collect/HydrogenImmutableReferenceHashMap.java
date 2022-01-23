@@ -117,6 +117,16 @@ public class HydrogenImmutableReferenceHashMap<K, V> extends ImmutableMap<K, V> 
     }
 
     @Override
+    ImmutableSet<K> createKeySet() {
+        return new ImmutableMapKeySet<>(this);
+    }
+
+    @Override
+    ImmutableCollection<V> createValues() {
+        return new ImmutableMapValues<>(this);
+    }
+
+    @Override
     boolean isPartialView() {
         return false;
     }

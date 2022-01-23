@@ -1,7 +1,7 @@
 {
   "package": "me.jellysquid.mods.hydrogen.mixin",
   "required": true,
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_17",
   "injectors": {
     "defaultRequire": 1
   },
@@ -17,8 +17,6 @@
     "client.model.MixinModelIdentifier"
   ],
   "mixins": [
-    "chunk.MixinChunkSerializer",
-    "chunk.MixinWorldChunk",
     "nbt.MixinNbtCompound",
     "state.MixinState",
     "util.MixinIdentifier"
