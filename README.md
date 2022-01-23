@@ -1,3 +1,14 @@
+## Status
+##### January 23rd, 2022
+
+**This repository has been archived** as we do not have the time or resources needed to maintain the project. No further updates will be published, and
+we won't be providing help for using it.
+
+If you are looking for a replacement, consider taking a look at [FerriteCore](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric), as it
+generally offers more significant improvements to memory usage in modded scenarios and is currently available for the latest version of Minecraft. 
+
+---
+
 ![Project icon](src/main/resources/assets/hydrogen/icon.png?raw=true)
 
 # Hydrogen (for Fabric)
